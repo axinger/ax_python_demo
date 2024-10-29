@@ -1,4 +1,7 @@
 from django.db import models
+from django.core import validators
+
+from book import forms
 
 
 # 迁移脚本,
@@ -8,7 +11,15 @@ from django.db import models
 class SysUser(models.Model):
     """自增主键，默认创建一个id字段的主键"""
     id = models.BigAutoField(primary_key=True, auto_created=True)
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100,
+
+                            # 表单验证
+                            validators=[
+
+                                validators.MinLengthValidator(limit_value=10),
+                                validators.MaxLengthValidator(limit_value=100),
+                            ]
+                            )
     age = models.IntegerField()
     createTime = models.DateTimeField(auto_now_add=True, db_column="create_time")  # 字段，审计，添加时间
 

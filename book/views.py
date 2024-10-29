@@ -1,7 +1,9 @@
+from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.db.models import Q
+from django.views.decorators.http import require_http_methods
 
+from book.forms import BookForm
 from book.models import SysUser
 
 
@@ -38,6 +40,7 @@ def addSysUser(request):
     return HttpResponse(f"插入数据库={user}")
 
 
+@require_http_methods(["GET"])  # 指定请求方式
 def getSysUser(request):
     # 查询所有
     for e in SysUser.objects.all():
@@ -75,3 +78,16 @@ def getSysUserQ(request):
     user = SysUser.objects.filter(Q(name__contains='j') & Q(age__gt=2)).all()
 
     return HttpResponse(f"更新数据库={user}")
+
+
+@require_http_methods(["POST"])  # 指定请求方式
+def getFormUser(request):
+    form = BookForm(request.POST)
+    if form.is_valid():
+
+        # form.title
+        title = form.cleaned_data.get("title")
+        return HttpResponse(f"表单验证成功title={title}")
+
+    else:
+        return HttpResponse(f"表单验证失败")
