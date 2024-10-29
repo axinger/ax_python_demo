@@ -6,6 +6,7 @@ from django.db import models
 # 同步到数据库
 # python manage.py migrate
 class SysUser(models.Model):
+    """自增主键，默认创建一个id字段的主键"""
     id = models.BigAutoField(primary_key=True, auto_created=True)
     name = models.CharField(max_length=100)
     age = models.IntegerField()

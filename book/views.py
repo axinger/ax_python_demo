@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.db.models import Q
 
 from book.models import SysUser
 
@@ -62,8 +63,15 @@ def deleteSysUser(request):
 
 
 def updateSysUser(request):
-
     user = SysUser.objects.get(id=1)
     user.age = 20
     user.save()
+    return HttpResponse(f"更新数据库={user}")
+
+
+# Q表达式
+def getSysUserQ(request):
+    # &  |
+    user = SysUser.objects.filter(Q(name__contains='j') & Q(age__gt=2)).all()
+
     return HttpResponse(f"更新数据库={user}")
