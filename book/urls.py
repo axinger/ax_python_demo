@@ -13,4 +13,7 @@ urlpatterns = [
     path('book/<str:id>', book_views.book_str2),
     path('book/slug/<slug:id>', book_views.book_str3),  #
     path('book/path/<slug:id>', book_views.book_str3),  # /1/2 为一个字符串
+
+    path('sysUser/add', book_views.addSysUser),  # /1/2 为一个字符串
+    path('sysUser/get', book_views.getSysUser),  # /1/2 为一个字符串
 ]
