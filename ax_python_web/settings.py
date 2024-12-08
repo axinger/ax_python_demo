@@ -73,6 +73,7 @@ WSGI_APPLICATION = 'ax_python_web.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# 数据库
 DATABASES = {
     'default': {
         # 'ENGINE': 'django.db.backends.sqlite3',

@@ -1,7 +1,5 @@
-from django.db import models
 from django.core import validators
-
-from book import forms
+from django.db import models
 
 
 # 迁移脚本,

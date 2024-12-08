@@ -27,5 +27,5 @@ urlpatterns = [
 
     path('', include('book.urls')), # include 方式，分层
 
-    path('head/', include('book.urls')),  # 统一path
+    # path('head/', include('book.urls')),  # 统一path
 ]

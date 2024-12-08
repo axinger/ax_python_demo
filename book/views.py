@@ -18,7 +18,7 @@ def book_str(request):
 
 
 def book_str2(request, id):
-    return HttpResponse(f"get请求获取参数={id}")
+    return HttpResponse(f"restful get请求获取参数={id}")
 
 
 def book_str3(request, id):
