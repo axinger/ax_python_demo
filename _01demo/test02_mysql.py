@@ -1,7 +1,7 @@
 import pymysql
 
 # 打开数据库连接
-db = pymysql.connect(host="hadoop102",port=3306,user="root",passwd="123456",db="test" )
+db = pymysql.connect(host="hadoop135",port=3308,user="root",passwd="123456",db="ax_test01" )
 
 # 使用 cursor() 方法创建一个游标对象 cursor
 cursor = db.cursor()
