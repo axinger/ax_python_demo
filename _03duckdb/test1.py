@@ -6,12 +6,21 @@ def left_join_mysql_tables_simple():
         conn = duckdb.connect()
 
         # 加载MySQL扩展
+        # try:
+        #     conn.execute("LOAD mysql")
+        # except:
+        #     conn.execute("INSTALL mysql")
+        #     conn.execute("LOAD mysql")
+
         try:
             conn.execute("LOAD mysql")
-        except:
-            conn.execute("INSTALL mysql")
-            conn.execute("LOAD mysql")
-
+        except duckdb.Error:
+            try:
+                conn.execute("INSTALL mysql")
+                conn.execute("LOAD mysql")
+            except duckdb.Error as e:
+                print(f"MySQL扩展安装或加载失败: {e}")
+                raise
         # 连接两个MySQL数据库
         conn.execute(
             "ATTACH 'host=localhost port=3306 user=root password=Abcd#1234 database=ax_test01' AS db1 (TYPE mysql)")
@@ -42,10 +51,10 @@ def left_join_mysql_tables_simple():
 
 # 使用
 if __name__ == "__main__":
-    columns, data = left_join_mysql_tables_simple()
+    head, data = left_join_mysql_tables_simple()
     if data:
         print("LEFT JOIN结果:")
-        print("列:", columns)
+        print("列:", head)
         for i, row in enumerate(data[:5]):  # 显示前5行
             print(f"行 {i + 1}: {row}")
         print(f"总行数: {len(data)}")
